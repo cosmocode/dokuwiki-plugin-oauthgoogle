@@ -1,12 +1,20 @@
 <?php
 
-use OAuth\OAuth2\Service\Google;
+use dokuwiki\plugin\oauthgoogle\Google;
 
 /**
  * Service Implementation for oAuth Google authentication
  */
 class action_plugin_oauthgoogle extends \dokuwiki\plugin\oauth\Adapter
 {
+    /**
+     * We use our own, modified version of the Google service
+     * @inheritdoc
+     */
+    public function registerServiceClass()
+    {
+        return Google::class;
+    }
 
     /** * @inheritDoc */
     public function getUser()
