@@ -2,8 +2,6 @@
 
 namespace dokuwiki\plugin\oauthgoogle;
 
-use OAuth\Common\Token\TokenInterface;
-
 /**
  * Modify the default lusitania Google Service
  */
@@ -25,27 +23,6 @@ class Google extends \OAuth\OAuth2\Service\Google {
         $uri = parent::getAuthorizationEndpoint();
         $uri->addToQuery('prompt', 'consent');
         return $uri;
-    }
-
-    /**
-     * Google does not reissue refresh tokens on access token refresh
-     *
-     * @inheritdoc
-     */
-    public function refreshAccessToken(TokenInterface $token)
-    {
-        // remember old refresh token
-        $refreshToken = $token->getRefreshToken();
-
-        $token = parent::refreshAccessToken($token);
-
-        // store the refresh token again
-        if(!$token->getRefreshToken()) {
-            $token->setRefreshToken($refreshToken);
-            $this->storage->storeAccessToken($this->service(), $token);
-        }
-
-        return $token;
     }
 
 }
