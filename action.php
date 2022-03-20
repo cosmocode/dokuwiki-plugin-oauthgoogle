@@ -40,7 +40,7 @@ class action_plugin_oauthgoogle extends \dokuwiki\plugin\oauth\Adapter
     /** @inheritDoc */
     public function getLabel()
     {
-        return 'Google';
+        return 'Sign in with Google';
     }
 
     /** @inheritDoc */
